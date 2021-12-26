@@ -9,7 +9,7 @@
 # 규칙2 : .이후 지우기
 # 규칙3 : 처음 세자리 + 글자 갯수 + 'e'의 갯수 + "!" 로 구성
 
-ulr = "http://google.com"
+ulr = "http://naver.com"
 a = ulr.replace("http://","")
 b = a[0:a.index(".")]
 password = b[0:3]+str(len(b))+str(b.count("e"))+"!"
