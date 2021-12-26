@@ -8,7 +8,7 @@ lotto_num = []
 count = 0
 
 while True :
-    if count == 6 :
+    if count > 5  :
         break
     n = get_n()
     if get_n not in lotto_num :
