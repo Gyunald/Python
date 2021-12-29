@@ -16,6 +16,6 @@ for i in range(5):
 print(list_2)
 list_3 = [100,101,102,103,104]
 list_2.pop() # 마지막 요소 삭제
-list_2.extend(list_3)
+list_2.extend(list_3) # 리스트 확장
 list_2.sort() # 오름차순 정렬
 print(list_2)

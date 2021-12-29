@@ -1,7 +1,7 @@
 cabinet = {3:"유재석",100:"김태호"}
 # print(cabinet[3])
 # print(cabinet[100])
-
+ 
 # print(cabinet.get(3))
 # # print(cabinet[5]) 에러
 # print(cabinet.get(5)) # 키값이 없어도 none 표기
@@ -21,8 +21,7 @@ cabinet["A-3"] = "김종국" # 덮어쓰기
 print(cabinet)
 
 # 간손님
-
-del cabinet.items[1]
+del cabinet["A-3"]
 print(cabinet)
 
 # key 들만 출력

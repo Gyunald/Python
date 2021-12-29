@@ -12,3 +12,5 @@ print(a, type(a))
 
 a = set(a)
 print(a, type(a))
+
+
