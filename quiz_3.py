@@ -1,6 +1,5 @@
 from random import *
 import random
-from typing import Counter, List
 
 c = 1
 f = []
