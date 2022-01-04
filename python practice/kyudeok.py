@@ -1,1 +1,0 @@
-print("kim kyu deok")
