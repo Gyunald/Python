@@ -1,5 +1,5 @@
-# import theater_module
-# theater_module.price(3)
+import theater_module
+theater_module.price(3)
 
 # import theater_module as mv
 # mv.price_morning(2)
@@ -11,5 +11,5 @@
 # price(5)
 # price_morning(6)
 
-from theater_module import price_soldier as soldier
-soldier(3)
+# from theater_module import price_soldier as soldier
+# soldier(3)
