@@ -7,7 +7,7 @@ def std_weight(height, gender) :
         return (height / 100) * (height / 100) * 21
     
     
-height = 185
+height = 175
 gender = "남자"
 weight = round(std_weight(height,gender),2)
 print(f"키 {height}cm 남자의 표준 체중은 {weight} 입니다")

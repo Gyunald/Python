@@ -1,6 +1,11 @@
+# abs 절대값 pow 제곱 max 최댓값 min 최솟값 round 반올림 
+# floor 내림 ceil 올림 sqrt 제곱근
+
+
 # -1 은 끝에서부터 시작
 # ,는 띄어쓰기 포함
 # [ n : n ] 범위 지정 (뒤의 n은 직전까지만 계산) 
+
 jumin = "990120-1234567"
 
 print("성별 :", jumin[7])
@@ -21,6 +26,11 @@ print("백문이 '불여일견' \"백견\"이 \'불여일타\'")
 # print("red\b apple") 
 # \t : 4칸 스페이스
 # print("red\tapple") # red    apple
-
-
-
+from random import *
+import random
+a = randrange(4,29)
+b = randint(4,28)
+c = random.sample(range(1,29),2)
+print(f"오프라인 스터디 모임 날짜는 매월 {a}일로 선정되었습니다.")
+print(f"오프라인 스터디 모임 날짜는 매월 {b}일로 선정되었습니다.")
+print(f"오프라인 스터디 모임 날짜는 매월 {sorted(c)}일로 선정되었습니다.")

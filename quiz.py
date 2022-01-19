@@ -17,3 +17,11 @@ print(f"""
 "{ulr}
 비밀번호는 {password} 입니다"
 """)
+
+station = ["사당", "신도림", "인천공항"]
+print(f"{station[0]}행 열차가 들어오고 있습니다.")
+
+
+# station = ["사당", "신도림", "인천공항"]
+# for i in station :
+#     print(f"{i}행 열차가 들어오고 있습니다.")
