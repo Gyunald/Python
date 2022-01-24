@@ -1,28 +1,31 @@
 # abs 절대값 pow 제곱 max 최댓값 min 최솟값 round 반올림 
 # floor 내림 ceil 올림 sqrt 제곱근
 
+# scores = {"a" : 0, "b" : 50, "c" : 100}
+# for subject, score in scores.items():
+#     print(subject.ljust(8), str(score).rjust(4), sep=":")
 
-# -1 은 끝에서부터 시작
-# ,는 띄어쓰기 포함
-# [ n : n ] 범위 지정 (뒤의 n은 직전까지만 계산) 
+# # zfill(n) n만큼 0으로 처리 3 = 001, 2 = 01
+# for num in range(1,21):
+#     print("대기번호 : " + str(num).zfill(3))
 
-jumin = "990120-1234567"
 
-print("성별 :", jumin[7])
-print("생년 :", jumin[1:3])
-print("월일 :", jumin[2:6])
-print("주민번호 :", jumin[7:])
-print("주민번호 :", jumin[-7:])
+# 빈 자리는 빈공간으로 두고, 오른쪽 정렬, 10자리
+print(f"{500: >10}")
 
-# \n : 줄바꿈
-# \" \' : 문장 내에서 따옴표
-print("백문이 불여일견\n백견이 불여일타")
-print("백문이 '불여일견' \"백견\"이 \'불여일타\'")
+# 양수일땐 + , 음수일 땐 -
+print(f"{500: >+10}")
+print(f"{-500: >+10}")
 
-# \\ : 문장내에서 \로 인식 (파일경로 \ >>> \\로 변경해야함)
-# \r : 커서를 만 앞으로 이동해서 문자열 길이만큼 변경
-# print("red apple\rgreen") # green apple이 아니고 greenpple
-# \b : 한글자 삭제
-# print("red\b apple") 
-# \t : 4칸 스페이스
-# print("red\tapple") # red    apple
+# 왼쪽 정렬, 빈칸은 _
+print(f"{500:_<10}")
+
+# 3자리 마다 콤마
+print(f"{500000000000:+,}")
+print(f"{-500000000000:+,}")
+
+# 빈 자리는 ^, 왼쪽정렬, 부호, 자릿수 확보, 3자리 마다 콤마
+print(f"{500000000000:^<+30,}")
+
+# 소수점 출력 (2째 자리에서 반올림)
+print(f"{5/3:.2f}")
