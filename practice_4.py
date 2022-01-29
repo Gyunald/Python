@@ -1,4 +1,3 @@
-import imp
 from random import *
 
 class Unit:
@@ -15,8 +14,9 @@ class Unit:
     def damaged(self, damage):
         print(f"{self.name} : {damage} 데미지를 입었습니다")
         self.hp -= damage
-        print(f"{self.name} : 현재 체력은 {self.hp} 입니다.")
-        if self.hp <= 0:
+        if self.hp > 0 :
+            print(f"{self.name} : 현재 체력은 {self.hp} 입니다.")
+        else:
             print(f"{self.name} : 파괴되었습니다.")
 
 
@@ -63,7 +63,7 @@ class Marine(AttackUnit):
     def stimpack(self):
         if self.hp >10 :
             self.hp -= 10
-            print(f"{self.name} 스팀팩 사용 (hp 10 감소")
+            print(f"{self.name} 스팀팩 사용 (hp 10 감소)")
         else:
             print(f"{self.name} 체력부족. 스팀팩 사용 불가.")
 
@@ -161,6 +161,6 @@ for unit in attack_units:
     unit.attack("1시")
 
 for unit in attack_units:    
-    unit.damaged(randint(5,21))
+    unit.damaged(randint(5,200))
 
 game_end()

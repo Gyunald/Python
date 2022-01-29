@@ -10,7 +10,7 @@
 # [코드]
 class SoldOutError(Exception) :
     def __init__(self):
-        print("재고 소진.")        
+        print("재고 소진")        
 
 chicken = 10
 waiting = 1
@@ -32,6 +32,5 @@ while 1 :
     except ValueError :
         print("주문을 확인하세요.")
     
-    except SoldOutError as err:
-        print(err)
+    except SoldOutError:
         break

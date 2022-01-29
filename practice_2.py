@@ -3,7 +3,7 @@
 # print("영어 : 50", file=score_file)
 # score_file.close()
 
-# score_file = open("score.txt", "a", encoding="utf-8")
+# score_file = open("score.txt", "a", encoding="utf-8") # apend
 # score_file.write("과학 : 80\n")
 # score_file.write("코딩 : 100")
 # score_file.close()

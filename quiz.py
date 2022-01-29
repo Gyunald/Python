@@ -10,10 +10,10 @@
 # 규칙3 : 처음 세자리 + 글자 갯수 + 'e'의 갯수 + "!" 로 구성
 
 
-a = "http://daum.net"
-b = a.replace("http://","")
-c = b[:b.index(".")]
-print(f"비밀번호는 {c[0:3]}{len(c)}{c.count('e')}! 입니다.")
+# a = "http://daum.net"
+# b = a.replace("http://","")
+# c = b[:b.index(".")]
+# print(f"비밀번호는 {c[0:3]}{len(c)}{c.count('e')}! 입니다.")
 
 # ulr = "http://naver.com"
 # a = ulr.replace("http://","")
@@ -25,10 +25,10 @@ print(f"비밀번호는 {c[0:3]}{len(c)}{c.count('e')}! 입니다.")
 # """)
 
 
-# station = ["사당", "신도림", "인천공항"]
-# print(f"{station[0]}행 열차가 들어오고 있습니다.")
+station = ["사당", "신도림", "인천공항"]
+print(f"{station[0]}행 열차가 들어오고 있습니다.")
 
 
-# station = ["사당", "신도림", "인천공항"]
-# for i in station :
-#     print(f"{i}행 열차가 들어오고 있습니다.")
+station = ["사당", "신도림", "인천공항"]
+for i in station :
+    print(f"{i}행 열차가 들어오고 있습니다.")

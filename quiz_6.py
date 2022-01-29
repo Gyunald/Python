@@ -11,17 +11,17 @@ class House :
         self.completion_year = completion_year
 
     def show_detail(self):
-        print(self.location, self. house_type, self. deal_type, self.price, self.completion_year)
-        
-houses = []
+        print(self.location, self.house_type, self.deal_type, self. price, self.completion_year)
+
+house_list = []
 house1 = House("강남", "아파트", "매매", "10억", "2010년")
 house2 = House("마포", "오피스텔", "전세", "5억", "2007년")
 house3 = House("송파", "빌라", "월세", "500/50", "2000년")
+house_list.append(house1)
+house_list.append(house2)
+house_list.append(house3)
 
-houses.append(house1)
-houses.append(house2)
-houses.append(house3)
+print(f"총 {len(house_list)}대의 매물이 있습니다.")
+for i in house_list :
+    i.show_detail()
 
-print(f"총 {len(houses)}대의 매물이 있습니다.")
-for house in houses:
-    house.show_detail()
