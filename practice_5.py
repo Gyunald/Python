@@ -1,3 +1,6 @@
+# abs 절대값 pow 제곱 max 최댓값 min 최솟값 round 반올림 
+# floor 내림 ceil 올림 sqrt 제곱근
+
 # print("A","B","C", sep=",", end=" ")
 # print("123456")
 

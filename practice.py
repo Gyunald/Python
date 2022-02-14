@@ -1,11 +1,32 @@
-# abs 절대값 pow 제곱 max 최댓값 min 최솟값 round 반올림 
-# floor 내림 ceil 올림 sqrt 제곱근
+# glob : 경로 내의 폴더 / 파일 목록 조회 (윈도우 dir)
 
-# scores = {"a" : 0, "b" : 50, "c" : 100}
-# for subject, score in scores.items():
-#     print(subject.ljust(8), str(score).rjust(4), sep=":")
+# import glob
+# print(glob.glob("*.py")) # 확장자가 py 인 모든 파일
 
-# # zfill(n) n만큼 0으로 처리 3 = 001, 2 = 01
-# for num in range(1,21):
-#     print("대기번호 : " + str(num).zfill(3))
+# os : 운영체제에서 제공하는 기본 기능
+import os
+# print(os.getcwd()) # 현재 디렉토리 = pwd
 
+# folder = "sample_dir"
+# if os.path.exists(folder):
+#     print("이미 존재하는 폴더입니다")
+#     os.rmdir(folder)
+#     print(folder, "폴더를 삭제하였습니다.")
+
+# else :
+#     os.makedirs(folder) # 폴더 생성
+#     print(folder, "폴더를 생성하였습니다.")
+
+# print(os.listdir())
+
+import time
+
+# print(time.localtime())
+print(time.strftime("%Y-%m-%d %H:%M:%S") )
+
+# import datetime
+# print(datetime.date.today())
+
+# today = datetime.date.today()
+# td = datetime.timedelta(days=100)
+# print(today + td)

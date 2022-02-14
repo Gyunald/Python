@@ -1,6 +1,10 @@
-with open("/Users/kyu-deokkim/Documents/Git/practice/byme.py", "w", encoding="utf-8") as f:
-    f.writelines("""def sign():\n\tprint("이 프로그램은 'GYUNALD'에 의해 만들어졌습니다.")""")
-f.close()
+with open("byme.py","w") as f:
+    f.write("""
+def sign():        
+    print("이 프로그램은 GYUNALD에 의해 만들어 졌습니다."
+    "E_mail : GYUNALD.COM"
+    "Phone : 123456789")
+    """)
 
 import byme
 byme.sign()
