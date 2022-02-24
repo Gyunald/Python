@@ -96,28 +96,48 @@
 # print("{:b}".format(10))
 # print(f"{10:b}")
 
-# # 1~100 사이 2진수러 변환 후 2진수에 0이 1개 포함된 수와 합.
-# a = 0
-# b = range(1, 100 + 1)
-# for i in b :
-#     if bin(i).count("0") == 2 :
-#         a += i
-#         print(f"{i} : {i:b}")
-
-# print(f"합계 : {a}")
-
-# a = [ i for i in range(1, 100 + 1) if bin(i).count("0") == 2 ]
-# print(a)
-# print(sum(a))
+# # 1~100을 2진수로 변환 후 0이 1개 포함된 수와 합.
 
 # a = 0
-# for i in range(1, 100 + 1) :
+# for i in range(1, 100 + 1):
 #     if f"{i:b}".count("0") == 1 :
-#         print(f"{i} : {i:b}")
 #         a += i
+#         print(f"{i} : {i:b}")
 # print(f"합계 : {a}")
 
-a = [i for i in range(1, 100 + 1) if f"{i:b}".count("0") == 1 ]
-for i in a :
-    print(f"{i} : {i:b}")
-print(f"합계 : {sum(a)}")
+# a = [ i for i in range(1, 100 + 1) if f"{i:b}".count("0") == 1 ]
+# for i in a :
+#     print(f"{i} : {i:b}")
+# print(f"합계 : {sum(a)}")
+
+# def a (*values, n=2) :
+#     for i in range(n):
+#         for value in values :
+#             print(value)
+#         print()
+# a("a", "b", "c", n=3)
+
+
+# # 리턴값을 가지고 리턴
+# def return_test() :
+#     return 100
+
+# value = return_test()
+# print(value)
+
+# def f(x) :
+#     return (2 * x) + 1
+# print(f(3))
+
+# def f(x) :
+#     return (x * x) + (2 * x) + 1
+# print(f(3))
+
+
+def mul(*values) :
+    a = 1
+    for i in values :
+        a *= i
+    return a
+
+print(mul(5,7,9,10))
