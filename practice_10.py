@@ -206,37 +206,144 @@
 # print(p("간단한 HTML 태그를 만드는 중입니다."))
 
 # def flatten(data):
-#     output = []
+#     a = []
 #     for i in data:
 #         if type(i) == list:
-#             output += flatten(i)
+#             a += flatten(i)
 #         else:
-#             output += [i]
-#     return output
+#             a += [i]
+#     return a
 
-# example = [[1, 2, 3], [4, [5, 6]], [7, [8, 9]]]
+# example = [[1,2,3],[4,[5,6]],7,[8,9]]
 # print(example)
 # print(flatten(example))
 
-min_to_seat = 2
-max_to_seat = 10
-all_people = 100
-memo = {}
+# 앉힐수있는최소사람수 = 2
+# 앉힐수있는최대사람수 = 10
+# 전체사람의수 = 100
 
-def do(rest_people, seated_people):
-    key = rest_people,seated_people
-    if key in memo :
-        return memo[key]
-    if rest_people < 0 :
-        return 0
-    if rest_people == 0 :
-        return 1
-    
-    count = 0
-    for i in range(seated_people, max_to_seat + 1) :
-        count += do(rest_people - i, i)
+# memo = {}
 
-    memo[key] = count
-    return count
-print(do(100,2))
-    
+# def 문제(남은사람수, 앉힌사람수):
+#     key = str([남은사람수, 앉힌사람수])
+
+#     if key in memo:
+#         return memo[key]
+#     if 남은사람수 < 0:
+#         return 0
+#     if 남은사람수 == 0:
+#         return 1
+
+#     count = 0
+#     for i in range(앉힌사람수, 앉힐수있는최대사람수 + 1):
+#         count += 문제(남은사람수 - i, i)
+#     memo[key] = count
+#     return count
+
+# print(문제(100,2))
+
+# a, b, c = 10 , 20 , 30
+# a, b, c = c, b, a
+# print(a,b,c)
+
+# a, b = 333 , 55
+# print(divmod(a,b)) # 몫, 나머지
+# x,y = divmod(a,b) 
+# print(x)
+# print(y)
+
+# def call_10_times(func):
+#     for i in range(10):
+#         func()
+
+# def print_hello():
+#     print("hello")
+
+# call_10_times(print_hello) # 매개변수로 함수를 전달
+
+# def power(item):
+#     return item * item
+
+# def under_3(item):
+#     return item < 3
+
+# list_input_a = [1,2,3,4,5]
+# # map = 결과값으로 새로운 리스트로 생성
+# # filter = 결과값이 True인것만으로 새로운 리스트 생성
+# list_output_a = map(lambda x : x * x, list_input_a) # 매개변수 : 리턴값
+# print(list_output_a)
+# print(list(list_output_a))
+
+# list_output_b = filter(lambda x: x < 3, list_input_a)
+# print(list_output_b)
+# print(list(list_output_b))
+
+# import random
+
+# a = list("가나다라마바사아자차카타파하")
+# with open("a.txt","w") as file:
+#     for i in range(100):
+#         name = random.choice(a) + random.choice(a)
+#         weight = random.randrange(40, 100)
+#         height = random.randrange(150, 200)
+#         file.write(f"{name}, {weight}, {height}\n")
+
+# with open("a.txt","r") as file:
+#     for line in file:
+#         (name, weight, height) = line.strip().split(", ") #
+        
+#         if not name or not weight or not height :
+#             continue
+
+#         bmi = int(weight) / ((int(height) / 100 ) ** 2)
+        
+#         result = ""
+
+#         if 25 <= bmi:
+#             result = "과체중"
+#         elif 18.5 <= bmi: 
+#             result = "정상체중"
+#         else :
+#             result = "저체중"
+            
+#         print(f"\n".join
+#         ([f"""
+#         이름 : {name}
+#         몸무게 : {weight}
+#         키 : {height}
+#         BMI : {round(bmi,2)}
+#         결과 : {result}"""]))
+
+# def test():
+#     print("A")
+#     yield 1
+#     print("B")
+#     yield 2
+#     print("C")
+
+# output = test()
+# print("D")
+# a = next(output)
+# print(a)
+# print("E")
+# b = next(output)
+# print(b)
+# print("F")
+# c = next(output) # next()호출 이후 yield 키워드를 만나지 못하고 끝나면 예외
+# print(c)
+# next(output)
+
+# numbers = [1,2,3,4,5,6]
+# print("::".join(
+#     map(str, numbers)
+#     ))
+
+numbers = list(range(1, 10 + 1))
+print("홀수만 추출하기")
+print(list(filter(lambda x : x % 2 == 1, numbers)))
+print()
+print("3 이상, 7 미만 추출하기")
+print(list(filter(lambda x : 3 <= x < 7, numbers)))
+print()
+print("제곱해서 50 미만 추출하기")
+print(list(filter(lambda x : (x ** 2) < 50, numbers)))
