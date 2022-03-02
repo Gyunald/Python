@@ -338,12 +338,82 @@
 #     map(str, numbers)
 #     ))
 
-numbers = list(range(1, 10 + 1))
-print("홀수만 추출하기")
-print(list(filter(lambda x : x % 2 == 1, numbers)))
+# numbers = list(range(1, 10 + 1))
+# print("홀수만 추출하기")
+# print(list(filter(lambda x : x % 2 == 1, numbers)))
+# print()
+# print("3 이상, 7 미만 추출하기")
+# print(list(filter(lambda x : 3 <= x < 7, numbers)))
+# print()
+# print("제곱해서 50 미만 추출하기")
+# print(list(filter(lambda x : (x ** 2) < 50, numbers)))
+
+# list_input_a = "1","2","3","A", 4
+
+# list_numbers = []
+
+# for item in list_input_a :
+#     try :
+#         float(item)
+#         list_numbers.append(item)
+#     except :
+#         pass
+# print(list_input_a)
+# print(list_numbers)
+
+# def test():
+#     print("start")
+#     try:
+#         print("try")
+#         return
+#         print("try_2")
+#     except:
+#         print("except")
+#     else:
+#         print("else")
+#     finally:
+#         print("finally")
+#     print("test")
+# test()
+
+# # 조건문을 사용
+# import random
+
+# numbers = [52, 273, 32, 103, 90, 10, 275]
+# a = random.choice(numbers)
+
+# print("(1) 요소 내부에 있는 값 찾기")
+# print(f"{a}는 {numbers.index(a)} 위치에 있습니다.")
+# print()
+
+# print("(2) 요소 내부에 없는 값 찾기")
+# number = 10000
+# if number in numbers :
+#     print(f"{number}는 {numbers.index(number)} 위치에 있습니다.")
+
+# else:
+#     print("리스트 내부에 없는 값입니다.")
+#     print()
+# print("정삭적으로 종료되었습니다.")
+
+# try except 사용
+
+import random
+
+numbers = [52, 273, 32, 103, 90, 10, 275]
+a = random.choice(numbers)
+print("(1) 요소 내부에 있는 값 찾기")
+print(f"{a}는 {numbers.index(a)} 위치에 있습니다.")
 print()
-print("3 이상, 7 미만 추출하기")
-print(list(filter(lambda x : 3 <= x < 7, numbers)))
-print()
-print("제곱해서 50 미만 추출하기")
-print(list(filter(lambda x : (x ** 2) < 50, numbers)))
+
+print("(2) 요소 내부에 없는 값 찾기")
+number = 10000
+try :
+    print(f"{number}는 {numbers.index(number)} 위치에 있습니다.")
+except:
+    print("리스트 내부에 없는 값입니다.")
+    print()
+finally:
+    print("정삭적으로 종료되었습니다.")
+
+
