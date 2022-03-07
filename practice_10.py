@@ -398,22 +398,21 @@
 
 # try except 사용
 
-import random
+# import random
 
-numbers = [52, 273, 32, 103, 90, 10, 275]
-a = random.choice(numbers)
-print("(1) 요소 내부에 있는 값 찾기")
-print(f"{a}는 {numbers.index(a)} 위치에 있습니다.")
-print()
+# numbers = [52, 273, 32, 103, 90, 10, 275]
+# a = random.choice(numbers)
+# print("(1) 요소 내부에 있는 값 찾기")
+# print(f"{a}는 {numbers.index(a)} 위치에 있습니다.")
+# print()
 
-print("(2) 요소 내부에 없는 값 찾기")
-number = 10000
-try :
-    print(f"{number}는 {numbers.index(number)} 위치에 있습니다.")
-except:
-    print("리스트 내부에 없는 값입니다.")
-    print()
-finally:
-    print("정삭적으로 종료되었습니다.")
-
+# print("(2) 요소 내부에 없는 값 찾기")
+# number = 10000
+# try :
+#     print(f"{number}는 {numbers.index(number)} 위치에 있습니다.")
+# except:
+#     print("리스트 내부에 없는 값입니다.")
+#     print()
+# finally:
+#     print("정삭적으로 종료되었습니다.")
 
