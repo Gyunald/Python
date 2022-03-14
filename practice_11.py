@@ -63,8 +63,51 @@
 
 # Student.output()
 
-import datetime
+# import datetime
 
-a = datetime.datetime.now()
-b = a.strftime("%Y{} %m{} %d{} %H{} %M{} %S{}").format(*"년월일시분초")
-print(b)
+# a = datetime.datetime.now()
+# b = a.strftime("%Y{} %m{} %d{} %H{} %M{} %S{}").format(*"년월일시분초")
+# print(b)
+
+# import os
+
+# output = os.listdir(".")
+# print("os.listdir():", output)
+# print()
+
+# print("# 폴더와 파일 구분하기")
+
+# for path in output:
+#     if os.path.isdir(path):
+#         print("폴더 :", path)
+    
+#     else:
+#         print("파일 :", path)
+
+
+# import os
+
+# # 폴더라면 또 탐색하기 
+# # 재귀함수
+# def read_folder(path):
+#     output = os.listdir(path)
+
+#     for item in output:
+#         if os.path.isdir(path + "/" + item):
+#             read_folder(path + "/" + item)
+        
+#         else :
+#             print("파일 :", item)
+        
+# read_folder(".")
+
+
+from urllib import request
+from bs4 import BeautifulSoup
+content = request.urlopen("http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=109")
+soup = BeautifulSoup(content, "html.parser")
+
+for data in soup.select("data"):
+    print("시간 :", data.select_one("tmef").string)
+    print("날씨 :", data.select_one("wf").string)
+    print("-" * 20)
