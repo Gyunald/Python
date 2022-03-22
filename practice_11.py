@@ -102,12 +102,19 @@
 # read_folder(".")
 
 
-from urllib import request
-from bs4 import BeautifulSoup
-content = request.urlopen("http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=109")
-soup = BeautifulSoup(content, "html.parser")
+# from urllib import request
+# from bs4 import BeautifulSoup
+# content = request.urlopen("http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=109")
+# soup = BeautifulSoup(content, "html.parser")
 
-for data in soup.select("data"):
-    print("시간 :", data.select_one("tmef").string)
-    print("날씨 :", data.select_one("wf").string)
-    print("-" * 20)
+# for data in soup.select("data"):
+#     print("시간 :", data.select_one("tmef").string)
+#     print("날씨 :", data.select_one("wf").string)
+#     print("-" * 20)
+
+
+import text_module as test
+
+radius = test.number_input()
+print(test.get_circumference(radius))
+print(test.get_circle_area(radius))
