@@ -43,12 +43,12 @@
 # len_word(*["a","ab","abc","abcd","abcde"])
 
 
-def len_word(*word):
-    output = 0
-    for number in word :
-        if type(number) == int: # 매개변수가 정수일 경우 더하기
-            output += number
-        else :
-            continue
-    print(output)
-len_word(*["a",100,"ab","abc",200,"abcd","abcde",300]) 
+# def len_word(*word):
+#     output = 0
+#     for number in word :
+#         if type(number) == int: # 매개변수가 정수일 경우 더하기
+#             output += number
+#         else :
+#             continue
+#     print(output)
+# len_word(*["a",100,"ab","abc",200,"abcd","abcde",300])
