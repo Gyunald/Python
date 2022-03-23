@@ -28,7 +28,7 @@ def create_soup(url):
 
 def news_form(index, title, link):
     print(f"{index + 1}." , title)
-    print(f"    (링크 : {link})")   
+    print(f"{link}")   
 
 
 # 날씨 정보
@@ -41,7 +41,7 @@ def scrape_weather():
     weather_2 = soup.find("div", attrs={"class":"weather_graphic"}).get_text()
     weather_3 = soup.find("ul", attrs={"class":"today_chart_list"}).get_text()
     weather_4 = soup.find("dl", attrs={"class":"summary_list"}).get_text()
-    print("[오늘의 날씨]")
+    print("[동패동 날씨]")
     print(weather.strip())
     print(weather_2.strip())
     print(weather_3.strip())
@@ -67,7 +67,7 @@ def scrape_news():
     url = "https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid1=101&sid2=260"
     soup = create_soup(url)
 
-    news = soup.find("ul", attrs={"class":"type06_headline"}).find_all("li",limit=3)
+    news = soup.find("ul", attrs={"class":"type06_headline"}).find_all("li",limit=5)
     
     for index, i in enumerate(news):
         title_index = 0
@@ -107,3 +107,4 @@ if __name__ == "__main__":
     scrape_weather()
     scrape_news()
     scrape_english()
+    
