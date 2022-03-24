@@ -113,8 +113,41 @@
 #     print("-" * 20)
 
 
-import text_module as test
+# import text_module as test
 
-radius = test.number_input()
-print(test.get_circumference(radius))
-print(test.get_circle_area(radius))
+# radius = test.number_input()
+# print(test.get_circumference(radius))
+# print(test.get_circle_area(radius))
+
+import re
+
+p = re.compile("ca.e")
+def match():
+    if m:
+        print(m.group()) # 일치하는 문자열만
+        print(m.string) # 일치하는 문자열 전체
+        print(m.start()) # 문자열의 시작 index
+        print(m.end()) # 문자열의 끝 index
+        print(m.span()) # 문자열의 시작과 끝 index
+    else:
+        print("not match")
+
+m = p.match("cafegogo") # 처음부터 일치하는지 확인
+match()
+
+a = p.findall("cafe coffee care") # 일치하는 모든단어를 리스트로 반환
+print(a)
+b = p.search("good care") # 일치하는게 있는지 확인
+print(b)
+
+
+# 1. p = re.compile("원하는 형태")
+# 2. m = p.match("비교할 문자열") : 문자열의 처음부터 일치하는지 확인
+# 3. m = p.search("비교할 문자열") : 문자열 중에 일치하는게 있는지 확인
+# 4. a = p.findall("비교할 문자열") : 일치하는 모든단어를 리스트로 반환
+
+# 원하는 형태 : 정규식
+# . ("ca.e") : 하나의 문자를 의미 ex) care, cafe (o) | caffe (x)
+# ^ ("^de") : 문자열의 시작 의미 ex) dest, destination (o) | fade (x)
+# $ ("ce$:) : 문자열의 끝 의미 ex) face (o) | case(x)
+

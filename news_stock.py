@@ -1,11 +1,13 @@
-from operator import index
 import requests
 from bs4 import BeautifulSoup
 import re
 
-def news_form(index, title, link):
-    print(f"{index + 1}." , title)
-    print(f"https://land.naver.com/{link}\n")
+# def news_form(index, title, link):
+#     print(f"{index + 1}." , title)
+#     print(f"https://finance.naver.com{link}\n")
+
+def news_form(title):
+    print(f"▶ {title}","\n")
 
 def create_soup(url):
     headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36"}
@@ -15,14 +17,17 @@ def create_soup(url):
     return soup
 
 def scrape_news():
-    print("[부동산 헤드라인 - 경기도]")
-    url = "https://land.naver.com/news/region.naver"
+    print("[시장지표]")
+    print()
+    
+    url = "https://finance.naver.com/marketindex/news/newsList.naver"
     soup = create_soup(url)
 
-    news_1 = soup.find("ul", attrs={"class":"headline_list live_list NEI=a:lst.title"}).find_all("li")
+    news_1 = soup.find("ul", attrs={"class":"news_list"}).find_all("li")
 
 
-    for index, i in enumerate(news_1):
+    # for index, i in enumerate(news_1):
+    for i in news_1:
         title_index_1 = 0
         img_1 = i.find("img")
         if img_1:
@@ -30,8 +35,9 @@ def scrape_news():
             
         img_title_1 = i.find_all("a")[title_index_1]
         title = img_title_1.get_text().strip()
-        link = img_title_1["href"]
-        news_form(index, title, link)
+        # link = img_title_1["href"]
+        # news_form(index, title, link)
+        news_form(title)
 
     # with open("land_news_region.txt", "w", encoding="utf-8") as f:
     #     f.write()

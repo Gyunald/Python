@@ -2,12 +2,12 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
-def news_form_1(index, title, link):
-    print(f"{index + 1}." , title)
-    print(f"https://land.naver.com/{link}\n")
+def news_form_1(title, link):
+    print(f"▶ {title}", title)
+    print(f"https://land.naver.com{link}\n")
 
-def news_form_2(index, title, link):
-    print(f"{index + 1}." , title)
+def news_form_2(title, link):
+    print(f"▶ {title}", title)
     print(f"https://land.naver.com/{link}")
 
 def create_soup(url):
@@ -19,14 +19,17 @@ def create_soup(url):
 
 def scrape_news():
     print("[부동산 헤드라인]")
+    print()
     url = "https://land.naver.com/news/headline.naver"
     soup = create_soup(url)
 
     news_1 = soup.find("div", attrs={"class":"news_area NE=a:hla"}).find_all("dt",limit=2)
     news_2 = soup.find("ul", attrs={"class":"headline_list"}).find_all("li")
 
+    f = open("news_land.txt", "w")
+    f.write("  [부동산 헤드라인]"+"\n\n")
 
-    for index, i in enumerate(news_1):
+    for i in news_1:
         title_index_1 = 0
         img_1 = i.find("img")
         if img_1:
@@ -35,9 +38,11 @@ def scrape_news():
         img_title_1 = i.find_all("a")[title_index_1]
         title = img_title_1.get_text().strip()
         link = img_title_1["href"]
-        news_form_1(index, title, link)
+        f.write(f"▶ {title}"+"\n\n")
+        f.write(f"  https://land.naver.com{link}"+"\n\n")
+        news_form_1(title, link)
 
-    for index, j in enumerate(news_2):
+    for j in news_2:
         title_index_2 = 0
         img = j.find("img")
         if img:
@@ -46,8 +51,10 @@ def scrape_news():
         img_title = j.find_all("a")[title_index_2]
         title = img_title.get_text().strip()
         link = img_title["href"]
-        news_form_2(index+2, title, link)
+        f.write(f"▶ {title}"+"\n\n")
+        f.write(f"  https://land.naver.com{link}"+"\n\n")
+        news_form_2(title, link)
         print()
-
+    f.close()
 if __name__ == "__main__":
     scrape_news()
