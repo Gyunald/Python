@@ -38,7 +38,7 @@ def scrape_news():
         img_title_1 = i.find_all("a")[title_index_1]
         title = img_title_1.get_text().strip()
         link = img_title_1["href"]
-        f.write(f"▶ {title}"+"\n\n")
+        f.write(f"▶ {title}"+"\n")
         f.write(f"  https://land.naver.com{link}"+"\n\n")
         news_form_1(title, link)
 
@@ -51,7 +51,7 @@ def scrape_news():
         img_title = j.find_all("a")[title_index_2]
         title = img_title.get_text().strip()
         link = img_title["href"]
-        f.write(f"▶ {title}"+"\n\n")
+        f.write(f"▶ {title}"+"\n")
         f.write(f"  https://land.naver.com{link}"+"\n\n")
         news_form_2(title, link)
         print()

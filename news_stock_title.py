@@ -3,8 +3,7 @@ from bs4 import BeautifulSoup
 import re
 
 def news_form(title):
-    print(f"▶ {title}")
-    print()
+    print(f"▶ {title}\n")    
     # print(f"https://land.naver.com/{link}\n")
 
 def create_soup(url):
@@ -15,7 +14,7 @@ def create_soup(url):
     return soup
 
 def scrape_news():
-    print("[증시 헤드라인]")
+    print("  [증시 헤드라인]")
     print()
 
     url = "https://finance.naver.com/news/mainnews.naver"
