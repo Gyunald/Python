@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import re
 
 def news_form(title):
     print(f"▶ {title}\n")    

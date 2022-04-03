@@ -3,11 +3,11 @@ from bs4 import BeautifulSoup
 import re
 
 def news_form_1(title, link):
-    print(f"▶ {title}", title)
+    print(f"▶ {title}")
     print(f"https://land.naver.com{link}\n")
 
 def news_form_2(title, link):
-    print(f"▶ {title}", title)
+    print(f"▶ {title}")
     print(f"https://land.naver.com/{link}")
 
 def create_soup(url):
