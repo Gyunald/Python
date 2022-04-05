@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 f = open("news_stock.list.txt", "w", encoding="utf-8") # 텍스트 파일 생성
 f.write("  [본전탈출 넘버원]"+"\n\n") # 텍스트 파일 제목쓰기
 
-search_word = ["삼성전자", "카카오", "러셀", "CJ씨푸드", "GS리테일"]
+search_word = "와이제이게임즈","엘앤에프","후성","맥스트"
 for word in search_word :
 
     url_list = {
