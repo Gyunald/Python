@@ -1,12 +1,9 @@
-import random
+words = 'this is a bunch of words'.split()
+# x = map(len, words)
+# print(sum(x))
 
-def creat_password_generator(password):
-    def creat_password(length):
-        output = []
-        for i in range(length):
-            output.append(random.choice(password))
-        return "".join(output)
-    return creat_password
+def a(one_word):
+    return len(one_word) > 4
 
-a = creat_password_generator("abcdef")
-print(a(5))
+x = filter(a, words)
+print(",".join(x))
