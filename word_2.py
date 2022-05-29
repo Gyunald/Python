@@ -4,23 +4,18 @@ import numpy as np
 import stylecloud
 import csv
 
-def rep(i):
-    for j in c:
-        for j in c:
-            if j in i:
-                return
-        else: 
-            return w.writelines(i[l:].replace('"',""))
-            # return w.writelines(i[l:].replace('"',""))
 
-name = "스윙중짜/창원/31"
-l = 23+len(name)
-c = f"{name}님","샵검색","이모티콘","사진","삭제된 메시지입니다","ㅋ","https","ㅎ"
+def rep():
+    for j in c:
+        return i[26:].replace(j,"").replace('"',"").replace(c[0],"").replace(c[1],"").replace(c[2],"").replace(c[-1],"")
+
+c = ["이모티콘","사진","삭제된 메시지입니다","ㅋ"]
 
 with open("/Users/kyu-deokkim/Downloads/2.csv", "rt", encoding="utf-8") as r, open("/Users/kyu-deokkim/Downloads/3.txt", "wt", encoding="utf-8") as w:
-    [rep(i) for i in r.readlines() if name in i]
-    
-    
+    for i in r.readlines():
+        if "찐쥬린" in i:
+            w.writelines(rep())
+
 w.close()
 
 stylecloud.gen_stylecloud(file_path="/Users/kyu-deokkim/Downloads/3.txt",
