@@ -11,7 +11,7 @@ def generate_work_schedule(start_time, end_time):
             if start_time <= breaks[i] < end_time:
                 if breaks[i] == '12:00' or breaks[i] == '17:00':
                     continue
-                if start_time < breaks[i] :
+                if start_time < breaks[i+1] :
                     schedule.append({'시작시간': breaks[i], '종료시간': breaks[i + 1]})
 
         if len(schedule) == 0 or schedule[0]['종료시간'] <= schedule[0]['시작시간']:
