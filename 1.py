@@ -71,56 +71,64 @@ def indirect_schedule(start_time2, end_time2):
 c1,c2,c3 = st.columns(3)
 
 with c1 :
-    
+    name = st.selectbox('이름',['김규덕','김진석'])
+    so = st.text_input('샵오더') 
+    work = st.text_input('상세내용')
     id ='kdkim'
     pw = 'xjsld12#'
     
 with c2 :
-    name = st.selectbox('이름',['김규덕','김진석'])
-    so = st.text_input('샵오더') 
-    work = st.text_input('상세내용')
+    start_time = st.time_input('시작 시간',time(8,0),step=600).strftime('%H:%M')
+    end_time = st.time_input('종료 시간',time(20,20),step=600).strftime('%H:%M')    
+    finish = st.checkbox('가공완료')
+    indirect_chech = st.checkbox('간접작업')
+
     # etc = st.text_input('비고')
 
 c4,c5,c6 = st.columns(3)
 
 with c4: 
     e = st.empty()
-    start_time = e.time_input('시작 시간1')
-    end_time = e.time_input('종료 시간1')
+    # start_time = e.time_input('시작 시간',key='s1').strftime('%H:%M')
+    # end_time = e.time_input('종료 시간',key='e1').strftime('%H:%M')
     e.empty()
 
 with c5 :
-    indirect_chech = st.checkbox('간접작업')
-    start_time = st.time_input('시작 시간',time(8,0),step=600).strftime('%H:%M')
-    end_time = st.time_input('종료 시간',time(20,20),step=600).strftime('%H:%M')    
-    finish = st.checkbox('가공완료')
-    
     if indirect_chech :
-        indirect = st.selectbox('간접작업',['타운홀미팅','직무교육','기타'])
-        start_time2 = st.time_input('간접작업 시작',time(14,40), step=600).strftime('%H:%M')
-        end_time2 = st.time_input('간접작업 종료',time(15,40), step=600).strftime('%H:%M')  
-
+        e2 = st.empty()
+        indirect = e2.selectbox('간접작업',['타운홀미팅','직무교육','기타'])
+        start_time2 = st.time_input('간접작업 시작',time(14,20), step=600).strftime('%H:%M')
+        end_time2 = st.time_input('간접작업 종료',time(15,20), step=600).strftime('%H:%M')
+        run_indirect = st.button('등록',use_container_width=True,key='b1')
         if indirect == '기타':
-            st.text_input('기타')
+            e2.text_input('기타')
 
-        run2 = st.button('등록2',use_container_width=True)
+        if run_indirect :          
+            st.session_state.direct.clear()  
+            st.session_state.indirect.clear()
+            timetable = direct_schedule(start_time, end_time)
+            timetable2 = indirect_schedule(start_time2,end_time2)
+            df = pd.DataFrame(timetable+timetable2).drop_duplicates()
+            df = df.sort_values(['시작시간', '종료시간']).reset_index(drop=True)
+            for i in range(1, len(df)):
+                if df.loc[i-1, '종료시간'] > df.loc[i, '시작시간'] and df.loc[i-1,'시작시간'] != df.loc[i,'시작시간']:
+                    df.loc[i-1, '종료시간'] = df.loc[i, '시작시간']
 
-        if run2 :
-            if not st.session_state.direct:
-                timetable2 = indirect_schedule(start_time2,end_time2)
-                direct_schedule(start_time,end_time)
-            else:
-                with c1:
-                    st.dataframe(st.session_state.direct)
-                    st.dataframe(st.session_state.indirect)
-                    df = pd.DataFrame(st.session_state.direct+st.session_state.indirect).drop_duplicates()
-                    st.write(df.sort_values(by=['종료시간']))
-      
-    # run = st.button('등록',use_container_width=True)
+                elif df.loc[i-1, '종료시간'] > df.loc[i, '시작시간'] and df.loc[i-1,'시작시간'] == df.loc[i,'시작시간']:
+                    df.loc[i, '시작시간'] = df.loc[i-1, '종료시간']
+            with c4:
+                st.dataframe(df)
+    else:        
+        run_direct = st.button('등록',use_container_width=True,key='b2')
 
-    # if run :    
-    #     timetable = direct_schedule(start_time, end_time)
-
+        if run_direct :
+            st.session_state.direct.clear()
+            with c4:
+                timetable = direct_schedule(start_time, end_time)
+                df = pd.DataFrame(timetable)
+                st.dataframe(df)
+st.session_state.direct
+st.session_state.indirect
 
 # if run :    
 #     chrome_optiins = Options() # 브라우저 꺼짐 방지
