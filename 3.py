@@ -10,7 +10,10 @@ import streamlit as st
 import pandas as pd
 from datetime import time, datetime, timedelta
 
-st.set_page_config(page_title="IMI e-MES") # layout='wide' 
+st.set_page_config(page_title="text") # layout='wide' 
+
+if 'direct' not in st.session_state:
+    st.session_state.direct = pd.DataFrame(columns=['샵오더','시작시간', '종료시간','상세내용','비고'])
 
 def run():
     chrome_optiins = Options() # 브라우저 꺼짐 방지
@@ -57,15 +60,7 @@ def run():
     driver.find_element(By.XPATH, f"//select[@name='s_WR_Worker']/option[text()='{name}']").click()
 
     for i in range(1,len(st.session_state.direct)+1):
-        if st.session_state.direct['시작시간'][i-1] == '10:00' or st.session_state.direct['종료시간'][i-1] == '15:00':
-            driver.find_element(By.XPATH, f'//*[@id="id_{i}"]/td[5]/select/option[9]').click()
-            driver.find_element(By.XPATH, f'//*[@id="id_{i}"]/td[6]/input').send_keys(st.session_state.direct['상세내용'][i-1])
-            driver.find_element(By.XPATH, f'//*[@id="id_{i}"]/td[7]/select/option[4]').click()
-            driver.find_element(By.XPATH, f'//*[@id="id_{i}"]/td[9]/input[1]').send_keys(st.session_state.direct['시작시간'][i-1])
-            driver.find_element(By.XPATH, f'//*[@id="id_{i}"]/td[10]/input[1]').send_keys(st.session_state.direct['종료시간'][i-1])
-            continue
-
-        elif st.session_state.direct['상세내용'][i-1] != work:
+        if st.session_state.direct['샵오더'][i-1] == '':
             driver.find_element(By.XPATH, f'//*[@id="id_{i}"]/td[5]/select/option[9]').click()
             driver.find_element(By.XPATH, f'//*[@id="id_{i}"]/td[6]/input').send_keys(st.session_state.direct['상세내용'][i-1])
             driver.find_element(By.XPATH, f'//*[@id="id_{i}"]/td[7]/select/option[4]').click()
@@ -74,7 +69,7 @@ def run():
             continue
 
         # 샵오더 
-        driver.find_element(By.XPATH, f'//*[@id="id_{i}"]/td[3]/input').send_keys(so)
+        driver.find_element(By.XPATH, f'//*[@id="id_{i}"]/td[3]/input').send_keys(st.session_state.direct['샵오더'][i-1])
         driver.find_element(By.XPATH, f'//*[@id="id_{i}"]/td[3]/input').send_keys(Keys.TAB)
 
         # OP No
@@ -101,47 +96,41 @@ def run():
         driver.find_element(By.XPATH, f'//*[@id="id_{i}"]/td[9]/input[1]').send_keys(st.session_state.direct['시작시간'][i-1])
         driver.find_element(By.XPATH, f'//*[@id="id_{i}"]/td[10]/input[1]').send_keys(st.session_state.direct['종료시간'][i-1])
 
-        if name == '김진석' and etc != '':
-            driver.find_element(By.XPATH, f'//*[@id="id_{i}"]/td[13]/input').send_keys(etc)
-
-    # 등록
-    driver.find_element(By.XPATH, '//*[@id="div_pop_result"]/div[4]/button').click()
-    driver.find_element(By.XPATH, '/html/body/div[4]/div/table/tr[2]/td/button[1]').click()
-    driver.close()
-    st.error('업데이트 완료')
+    # # 등록
+    # driver.find_element(By.XPATH, '//*[@id="div_pop_result"]/div[4]/button').click()
+    # driver.find_element(By.XPATH, '/html/body/div[4]/div/table/tr[2]/td/button[1]').click()
+    # driver.close()
+    # st.error('업데이트 완료')
     
 
-def direct_schedule(start_time, end_time, s2='', s3='', etc=''):
+def direct_schedule(start_time, end_time):
     schedule = st.session_state.direct
-    breaks = [s2, start_time, '10:00', '10:10', '11:45',
-            '12:45', '15:00', '15:20', '17:00', '17:20', s3, end_time]
+    breaks = [start_time, '10:00', '10:10', '11:45',
+            '12:45', '15:00', '15:20', '17:00', '17:20', end_time]
     breaks = sorted(list(set(breaks)))
 
-    if s2 < end_time:
+    if start_time < end_time:
         for i in range(len(breaks) - 1):            
-            if start_time <= breaks[i] < end_time:
+            if start_time <= breaks[i] :
                 if breaks[i] == '10:00' or breaks[i] == "15:00" :
                     schedule = pd.concat([pd.DataFrame([
-                        {'시작시간': breaks[i], '종료시간': breaks[i + 1], '상세내용': '휴식', '비고' : ''}
+                        {'샵오더': '', '시작시간': breaks[i], '종료시간': breaks[i + 1], '상세내용': '휴식', '비고' : ''}
                         ]), schedule])
 
                 elif breaks[i] == '11:45' or breaks[i] == '17:00':
                     continue
-
-                elif breaks[i] == s2 or breaks[i+1] == s3:
+                
+                elif indirect !='' and start_time == breaks[i] and end_time == breaks[i+1]:
                     schedule = pd.concat([pd.DataFrame([
-                        {'시작시간': breaks[i], '종료시간': breaks[i + 1], '상세내용': indirect, '비고' : ''}
+                        {'샵오더': '','시작시간': breaks[i], '종료시간': breaks[i + 1], '상세내용': indirect, '비고' : ''}
                         ]), schedule])
 
-                elif start_time <= breaks[i+1]:
-                    if name != '안형철' :
-                        schedule = pd.concat([pd.DataFrame([
-                            {'시작시간': breaks[i], '종료시간': breaks[i + 1], '상세내용': work, '비고' : ''}
-                            ]), schedule])
-                    else: 
-                        schedule = pd.concat([pd.DataFrame([
-                        {'시작시간': breaks[i], '종료시간': breaks[i + 1], '상세내용': work, '비고' : etc}
+                elif indirect == '' and start_time <= breaks[i+1]:
+                    schedule = pd.concat([pd.DataFrame([
+                        {'샵오더': so,'시작시간': breaks[i], '종료시간': breaks[i + 1], '상세내용': work, '비고' : etc}
                         ]), schedule])
+
+                        
         schedule=schedule.drop_duplicates(['시작시간','종료시간']).sort_values('시작시간').reset_index(drop=True)
         st.session_state.direct = schedule
         return schedule
@@ -163,7 +152,7 @@ def on_message_input():
 
 current_week = datetime.today().isocalendar()[1]
 date = datetime.now().date()
-st.title(date)
+st.title('테스트 페이지')
 
 name_list = ['김진석','이병호','최재형',
             '김규덕','이호성','김태훈',
@@ -179,100 +168,74 @@ elif current_week % 2 == 1 :
 t1,t2 = st.tabs(['작업일보','잔업'])
 
 with t1 :
-    c1, c2 = st.columns(2)
-
+    add_id = st.radio('선택',['직접','간접'],horizontal=True)
+    c1, c2,c3 = st.columns([.5,.5,1])
     with c1:
-        start_time = st.time_input('시작 시간', time(8, 0), step=600).strftime('%H:%M')
-        end_time = st.time_input('종료 시간', time(20, 20), step=600).strftime('%H:%M')
-        finish = st.checkbox('가공완료')
-        if finish :
-            수량 = st.number_input('수량',1,step=1)
+        indirect = ''
+        empty_name = st.empty()
+        empty_so = st.empty()
+        name = empty_name.selectbox('이름', sorted(name_list))
+        so = empty_so.text_input('샵오더')
+        empty_work = st.empty()
+        start_time = st.time_input('시작 시간', time(8, 0), step=600)
+        end_time = st.time_input('종료 시간', time(20, 20), step=600)
+        empty_start = st.empty()
+        empty_end = st.empty()
+        empty_etc = st.empty()
+        empty_finish = st.empty()
         
-        e = st.empty()
-        indirect_check = e.checkbox('간접작업')
+        work = empty_work.text_input('상세내용')
 
-    with c2:
-        name = st.selectbox('이름', sorted(name_list))
-        e11 = st.empty()
-        so = e11.text_input('샵오더')
-        # etc = st.text_input('비고', key='etc1')
-        
-        if name == '김진석' :
-            e11.empty()
-            work = st.text_input('상세내용','공정진행')
-            etc = st.text_input('비고', key='etc2')
-            e.empty()
-            indirect_check = e.checkbox('간접작업',value=True)
-
-        elif name == '박민호':
-            work = st.selectbox('상세내용',sorted(['3D프린트 준비작업&블래스팅작업','3D 프린트 언팩킹','방전 가공']))
-
-        elif name == '안형철':
-            work = st.selectbox('상세내용',sorted(['MC03-9500','MC03-6500']))
-            etc = st.text_input('비고')
-        else:
-            work = st.selectbox('상세내용',sorted(['세팅','황삭','정삭','수정']))
+        etc = empty_etc.text_input('비고')
         id ='kdkim'
         pw = 'xjsld12#'
-
-    c4, c5 = st.columns(2)
-
-    with c4:
-        e1 =st.empty()
-        button = e1.button('등록', use_container_width=True,key='b1')
-
-        if indirect_check:        
-            e1.empty()
-            e = st.empty()
-            if name == '박민호':
-                indirect = e.selectbox('간접작업', sorted([
-                    '3D 프린터 점검','디파우더 점검','언팩킹 및 디파우더 청소', '3D 모델링', 
-                    '방전기 필터 교체','타운홀미팅', '직무교육', '회의', '기타'
-                ]),index=0 )
-            else:
-                indirect = e.selectbox('간접작업', ['공정회의','BOM 도면배포','타운홀미팅', '직무교육', '회의', '기타'])
-
-            start_time2 = st.time_input('간접작업 시작', time(8, 0), step=600)
-            end_time2 = st.time_input('종료', datetime.combine(datetime.min, start_time2) + timedelta(minutes=30)).strftime('%H:%M')       
-            add_button = st.button('추가', use_container_width=True)
-            button = st.button('등록',use_container_width=True, key='b2')
+        finish = empty_finish.checkbox('가공완료')
+        if finish :
+            수량 = st.number_input('수량',1,step=1)
             
-            if indirect == '기타':
-                indirect = e.text_input('기타')
-                
-            if add_button:
-                with c5:
-                    new_schedule = direct_schedule(start_time, end_time, start_time2.strftime('%H:%M'), end_time2, etc=etc)
-                    st.session_state.direct = pd.concat([st.session_state.direct, new_schedule]).drop_duplicates().sort_values(['시작시간','종료시간']).reset_index(drop=True)
-                    
-                    for j in st.session_state.direct.loc[st.session_state.direct['시작시간'].duplicated() == True].index:
-                        if j in st.session_state.direct.index:
-                            st.session_state.direct.drop(index=j, inplace=True)
-                    
-                    for k in st.session_state.direct[st.session_state.direct['시작시간'] < st.session_state.direct['종료시간'].shift(1)].index:
-                        if k in st.session_state.direct.index:
-                            st.session_state.direct.loc[k-1, '종료시간'] = st.session_state.direct.loc[k, '시작시간']
-                    st.dataframe(st.session_state.direct.reset_index(drop=True),use_container_width=True,hide_index=True)
-            else:
-                with c5:
-                    st.dataframe(st.session_state.direct,use_container_width=True,hide_index=True)            
-        else:
-            st.session_state.direct= pd.DataFrame(columns=['시작시간', '종료시간','상세내용', '비고'])
-            with c5:
-                try:
-                    schedule = direct_schedule(start_time, end_time,etc=etc)
-                    st.dataframe(schedule,use_container_width=True,hide_index=True)
-                except:
-                    st.info('샵오더,상세내용 입력')
+        if add_id == '간접': 
+            empty_name.empty()
+            empty_so.empty()
+            empty_work.empty()
+            empty_start.empty()
+            empty_end.empty()
+            empty_etc.empty()
+            empty_finish.empty()
 
-    if button :
-        if name != '김진석' and so != '' and work != '':
-            run()
-        elif name == '김진석' and work != '':
-            run()
+            indirect = st.selectbox('상세내용2', ['공정회의','BOM 도면배포','타운홀미팅', '직무교육', '회의', '기타'])
+            if indirect == '기타':
+                indirect = st.text_input('기타')
+
+        add_button = st.button('추가', use_container_width=True)
+        button = st.button('등록', use_container_width=True,key='b1')
+
+        if add_button:
+            with c3:
+                new_schedule = direct_schedule(start_time.strftime('%H:%M'), end_time.strftime('%H:%M'),)
+                st.session_state.direct = pd.concat([st.session_state.direct, new_schedule]).drop_duplicates().sort_values(['시작시간','종료시간']).reset_index(drop=True)
+                
+                for j in st.session_state.direct.loc[st.session_state.direct['시작시간'].duplicated() == True].index:
+                    if j in st.session_state.direct.index:
+                        st.session_state.direct.drop(index=j, inplace=True)
+                
+                for k in st.session_state.direct[st.session_state.direct['시작시간'] < st.session_state.direct['종료시간'].shift(1)].index:
+                    if k in st.session_state.direct.index:
+                        st.session_state.direct.loc[k-1, '종료시간'] = st.session_state.direct.loc[k, '시작시간']
+                st.session_state.direct = st.session_state.direct.reset_index(drop=True)
+                st.dataframe(st.session_state.direct.reset_index(drop=True),use_container_width=True,hide_index=True)
+                
+        else:
+            with c3:
+                st.dataframe(st.session_state.direct,use_container_width=True,hide_index=True)            
+
+
+    # if button :
+    #     if so != '' and work != '':
+    #         run()
+
 
 with t2:
-    c1,c2= st.columns([1.05,1])
+    c1,c3= st.columns([1.05,1])
     
     with c1:
         with st.form('f1',clear_on_submit=True):
@@ -300,7 +263,7 @@ with t2:
             if button :
                 on_message_input()
 
-        with c2:
+        with c3:
             st.dataframe(server_state.ot.fillna(''),use_container_width=True,hide_index=True,height=563)
 
 # if name == '김진석' :
@@ -320,3 +283,30 @@ with t2:
 #     for message in st.session_state.messages:
 #         with  st.chat_message(message["name"]):
 #             st.markdown(f"{message['content']}")
+
+
+
+# for i in range(1,len(st.session_state.direct)+1):
+#     i
+#     if st.session_state.direct['시작시간'][i-1] == '10:00' or st.session_state.direct['종료시간'][i-1] == '15:00':
+#         st.session_state.direct['샵오더'][i-1]
+#         st.session_state.direct['시작시간'][i-1]
+#         st.session_state.direct['종료시간'][i-1]
+#         st.session_state.direct['상세내용'][i-1]
+#         continue
+
+#     elif st.session_state.direct['샵오더'][i-1] == '':
+#         st.session_state.direct['샵오더'][i-1]
+#         st.session_state.direct['시작시간'][i-1]
+#         st.session_state.direct['종료시간'][i-1]
+#         st.session_state.direct['상세내용'][i-1]
+#         continue
+
+#     # 샵오더 
+#     so
+
+#     # 상세내용        
+#     st.session_state.direct['상세내용'][i-1]
+    
+#     st.session_state.direct['시작시간'][i-1]
+#     st.session_state.direct['종료시간'][i-1]
