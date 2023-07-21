@@ -169,7 +169,7 @@ t1,t2 = st.tabs(['작업일보','잔업'])
 
 with t1 :
     add_id = st.radio('선택',['직접','간접'],horizontal=True)
-    c1, c2,c3 = st.columns([.5,.5,1])
+    c1, c2 = st.columns([.7,1.5])
     with c1:
         indirect = ''
         empty_name = st.empty()
@@ -210,7 +210,7 @@ with t1 :
         button = st.button('등록', use_container_width=True,key='b1')
 
         if add_button:
-            with c3:
+            with c2:
                 new_schedule = direct_schedule(start_time.strftime('%H:%M'), end_time.strftime('%H:%M'),)
                 st.session_state.direct = pd.concat([st.session_state.direct, new_schedule]).drop_duplicates().sort_values(['시작시간','종료시간']).reset_index(drop=True)
                 
@@ -222,10 +222,12 @@ with t1 :
                     if k in st.session_state.direct.index:
                         st.session_state.direct.loc[k-1, '종료시간'] = st.session_state.direct.loc[k, '시작시간']
                 st.session_state.direct = st.session_state.direct.reset_index(drop=True)
+                st.write('####')
                 st.dataframe(st.session_state.direct.reset_index(drop=True),use_container_width=True,hide_index=True)
                 
         else:
-            with c3:
+            with c2:
+                st.write('####')
                 st.dataframe(st.session_state.direct,use_container_width=True,hide_index=True)            
 
 
@@ -235,7 +237,7 @@ with t1 :
 
 
 with t2:
-    c1,c3= st.columns([1.05,1])
+    c1,c2= st.columns([1.05,1])
     
     with c1:
         with st.form('f1',clear_on_submit=True):
@@ -263,7 +265,7 @@ with t2:
             if button :
                 on_message_input()
 
-        with c3:
+        with c2:
             st.dataframe(server_state.ot.fillna(''),use_container_width=True,hide_index=True,height=563)
 
 # if name == '김진석' :
