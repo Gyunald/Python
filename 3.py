@@ -177,8 +177,14 @@ with t1 :
         name = empty_name.selectbox('이름', sorted(name_list))
         so = empty_so.text_input('샵오더')
         empty_work = st.empty()
-        start_time = st.time_input('시작 시간', time(8, 0), step=600)
-        end_time = st.time_input('종료 시간', time(20, 20), step=600)
+        if len(st.session_state.direct['종료시간']) > 0:
+            start_time = st.time_input('시작 시간', datetime.strptime(st.session_state.direct['종료시간'].iloc[-1], '%H:%M'), step=600)
+            end_time = st.time_input('종료 시간', datetime.combine(datetime.min, start_time) + timedelta(minutes=30) ,step=600)
+
+        else:
+            start_time = st.time_input('시작 시간', time(8,0), step=600)
+            end_time = st.time_input('종료 시간', time(20, 20), step=600)
+
         empty_start = st.empty()
         empty_end = st.empty()
         empty_etc = st.empty()
